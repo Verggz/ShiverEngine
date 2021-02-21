@@ -11,23 +11,39 @@ class PIXIInterface{
         
         document.body.appendChild(app.view);
 
-           
         this.app = app;
-        app.renderer.backgroundColor = 0xFFFFFF;
-        new SpriteCreator(app,'/../lightblue.jpg',{name:'lightblue'});
+        this.Initalize();
+    }
+
+    //Set all app settings for the engine / game
+    Initalize(){
+        this.app.renderer.backgroundColor = 0xFFFFFF;
+        this.app.stage.interactive = true;
+        
+        this.LoadContent();
+    }
+
+    //Create / load your classes and sprites here 
+    LoadContent(){
+        this.mainworld = new MainWorld(this.app);
+        //new SpriteCreator(this.app,'/../lightblue.jpg',{name:'lightblue'});
+
         this.Update();
     }
     
 
     Update(){
-        this.app.ticker.add((delta) => {
-            console.log(this.app.ticker.FPS)
+        this.app.ticker.add((deltaTime) => {
             //console.log(delta);
             if((window.innerWidth == screen.width && window.innerHeight == screen.height)){
                 this.app.resizeTo = window;
                 this.app.resize();
             }
+
+           
         });
+
+        this.mainworld.Update();
     }
     
 }

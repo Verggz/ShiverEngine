@@ -7,10 +7,26 @@ class Scene{
         this.managerName = managerName;
         this.entities = entities;
         this.objects = objects;
+
+        this.Initalize();
+    }
+
+    Initalize(){
+
+        this.LoadObjects();
+    }
+
+    LoadObjects(){
+        //this.app.loader.add()
     }
 
     Update(){
+        this.LoadObjects();
+    }
+
+    SetPosition(pos){
         
+        return pos;
     }
 }
 

@@ -1,24 +1,31 @@
-const { Sprite } = require("pixi.js");
+let PIXI = require('pixi.js');
 
 class SpriteCreator{
     constructor(app,src,options){
+        this.sprite = null;
         app.loader.add(options.name,'../assets' + src).load((loader,resources) =>{
-            const bunny = new PIXI.Sprite(resources[options.name].texture);
+            this.sprite = new PIXI.Sprite(resources[options.name].texture);
             
             
             // Setup the position of the bunny
-            bunny.x = app.renderer.width / 2;
-            bunny.y = app.renderer.height / 2;
+            this.sprite.x = app.renderer.width / 2;
+            this.sprite.y = app.renderer.height / 2;
         
-            bunny.position.set(640,480);
-            bunny.scale.set(0.5,0.5);
+            this.sprite.position.set(options.position.x,options.position.y);
+            this.sprite.scale.set(0.5,0.5);
             // Rotate around the center
-            bunny.anchor.x = 0.5;
-            bunny.anchor.y = 0.5;
+            this.sprite.anchor.x = 0.5;
+            this.sprite.anchor.y = 0.5;
+            
         
-            // Add the bunny to the scene we are building.
-            app.stage.addChild(bunny);
+            // Add the bunny to the scene we are building
         });
+
+        return this.sprite;
+        
+    }
+
+    SaveSprite(){
         
     }
 
